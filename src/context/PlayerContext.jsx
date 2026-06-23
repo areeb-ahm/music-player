@@ -188,7 +188,7 @@ export function PlayerProvider({ children }) {
 			if (tag === 'input' || tag === 'textarea') return
 
 			if (e.code === 'Space') {
-				e.preventDefault()
+				e.preventDefault() 
 				togglePlay()
 			} else if (e.code === 'ArrowRight') {
 				playNext()
