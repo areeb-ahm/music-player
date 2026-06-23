@@ -16,19 +16,14 @@ export default function HomePage() {
         <div className="hidden md:flex">
           <PlaylistSidebar />
         </div>
-        <div className="flex-1 flex flex-col overflow-hidden">
-          <div className="px-6 pt-4 pb-3" style={{ borderBottom: '1px solid var(--border)' }}>
+        <div className="flex-1 flex flex-col overflow-hidden bg-[color:var(--bg-base)]">
+          <div className="px-8 pt-8 pb-6" style={{ borderBottom: '1px solid var(--border)' }}>
             <SearchBar />
           </div>
-          <div className="flex md:hidden gap-2 px-6 py-2 overflow-x-auto scrollbar-hide">
+          <div className="flex md:hidden gap-2 px-6 py-3 overflow-x-auto scrollbar-hide">
             {GENRES.map(genre => (
               <button key={genre} onClick={() => setSelectedGenre(genre)}
-                className="shrink-0 px-3 py-1.5 rounded-full text-xs font-medium transition-colors cursor-pointer"
-                style={{
-                  background: selectedGenre === genre ? 'var(--accent)' : 'var(--bg-card)',
-                  color: selectedGenre === genre ? 'white' : 'var(--text-secondary)',
-                  border: '1px solid var(--border)'
-                }}>
+                className={`genre-pill ${selectedGenre === genre ? 'active' : ''} shrink-0 px-6 py-2.5 rounded-full text-sm font-bold`}>
                 {genre}
               </button>
             ))}

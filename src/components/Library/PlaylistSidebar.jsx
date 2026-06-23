@@ -6,45 +6,53 @@ export default function PlaylistSidebar() {
 	const { selectedGenre, setSelectedGenre, activePlaylistId, playPlaylist, tracks } = usePlayer()
 
 	return (
-		<div style={{ background: 'var(--bg-surface)', borderRight: '1px solid var(--border)' }} className="w-56 shrink-0 flex flex-col h-full overflow-y-auto">
+		<div className="w-60 shrink-0 flex flex-col h-full overflow-y-auto"
+			style={{ background: 'var(--bg-surface)', borderRight: '1px solid var(--border)' }}>
 
 			<NowPlayingCard />
 
-			<div className="p-4">
-				<p style={{ color: 'var(--text-muted)' }} className="text-xs uppercase tracking-widest font-semibold mb-3">Genre</p>
-				{GENRES.map((genre) => {
-					const active = genre === selectedGenre
-					return (
-						<button
-							key={genre}
-							onClick={() => setSelectedGenre(genre)}
-							style={active ? { background: 'var(--accent-dim)', color: 'var(--accent-light)', fontWeight: 600 } : { color: 'var(--text-secondary)' }}
-							className="w-full text-left px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer mb-1 hover:bg-[color:var(--bg-hover)]"
-						>
-							{genre}
-						</button>
-					)
-				})}
+			<div className="px-6 pt-6 pb-4">
+				<p style={{ color: 'var(--text-muted)' }} className="text-xs uppercase tracking-[0.15em] font-bold mb-4 px-2">Genre</p>
+				<div className="flex flex-col gap-1">
+					{GENRES.map((genre) => {
+						const active = genre === selectedGenre
+						return (
+							<button
+								key={genre}
+								onClick={() => setSelectedGenre(genre)}
+								className={`sidebar-item ${active ? 'active' : ''} w-full text-left px-4 py-2.5 rounded-xl text-base font-medium cursor-pointer`}
+								style={!active ? { color: 'var(--text-secondary)' } : undefined}
+							>
+								{genre}
+							</button>
+						)
+					})}
+				</div>
 			</div>
 
-			<div className="p-4 border-t" style={{ borderColor: 'var(--border)' }}>
-				<p style={{ color: 'var(--text-muted)' }} className="text-xs uppercase tracking-widest font-semibold mb-3">Playlists</p>
-				{PLAYLISTS.map((playlist) => {
-					const active = playlist.id === activePlaylistId
-					return (
-						<div
-							key={playlist.id}
-							onClick={() => playPlaylist(playlist, TRACKS)}
-							className={`cursor-pointer py-2 px-3 rounded-lg mb-1 transition-colors hover:bg-[color:var(--bg-hover)] ${active ? 'border-l-2 border-purple-500 pl-2 font-semibold' : ''}`}
-						>
-							<div className="text-sm">{playlist.name}</div>
-							<div className="text-xs" style={{ color: 'var(--text-muted)' }}>{playlist.trackIds.length} tracks</div>
-						</div>
-					)
-				})}
+			<div className="px-6 pt-4 pb-6 border-t" style={{ borderColor: 'var(--border)' }}>
+				<p style={{ color: 'var(--text-muted)' }} className="text-xs uppercase tracking-[0.15em] font-bold mb-4 px-2">Playlists</p>
+				<div className="flex flex-col gap-2">
+					{PLAYLISTS.map((playlist) => {
+						const active = playlist.id === activePlaylistId
+						return (
+							<div
+								key={playlist.id}
+								onClick={() => playPlaylist(playlist, TRACKS)}
+								className={`sidebar-item ${active ? 'active' : ''} cursor-pointer py-3 px-4 rounded-xl`}
+							>
+								<div className="text-base font-bold" style={{ color: active ? 'var(--accent-light)' : 'var(--text-primary)' }}>
+									{playlist.name}
+								</div>
+								<div className="text-xs mt-1 font-medium" style={{ color: 'var(--text-muted)' }}>
+									{playlist.trackIds.length} tracks
+								</div>
+							</div>
+						)
+					})}
+				</div>
 			</div>
 
 		</div>
 	)
 }
-

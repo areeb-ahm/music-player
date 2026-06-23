@@ -21,16 +21,30 @@ export default function ProgressBar() {
 	return (
 		<div className="flex items-center gap-3 w-full">
 
-			<span style={{ color: 'var(--text-muted)' }} className="text-xs font-mono w-10 text-right shrink-0">{formatTime(currentTime || 0)}</span>
+			<span style={{ color: 'var(--text-muted)' }} className="text-xs font-mono w-12 text-right shrink-0 tabular-nums">
+				{formatTime(currentTime || 0)}
+			</span>
 
-			<div onClick={handleClick} className="flex-1 h-1 rounded-full cursor-pointer group relative" style={{ background: 'var(--bg-hover)' }}>
-				<div className="h-full rounded-full transition-all" style={{ width: percentage + '%', background: 'var(--accent)' }} />
-				<div className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" style={{ left: `calc(${percentage}% - 6px)`, background: 'var(--accent-light)' }} />
+			<div onClick={handleClick} className="progress-track flex-1 h-[6px] rounded-full cursor-pointer relative"
+				style={{ background: 'rgba(255, 255, 255, 0.06)' }}>
+				<div className="h-full rounded-full transition-all relative"
+					style={{
+						width: percentage + '%',
+						background: 'var(--accent-gradient)'
+					}}>
+					<div className="absolute right-0 top-1/2 w-4 h-4 rounded-full progress-thumb"
+						style={{
+							background: 'var(--accent-light)',
+							transform: 'translate(50%, -50%) scale(0.8)',
+							boxShadow: '0 0 10px rgba(168, 85, 247, 0.6)'
+						}} />
+				</div>
 			</div>
 
-			<span style={{ color: 'var(--text-muted)' }} className="text-xs font-mono w-10 shrink-0">{formatTime(duration || 0)}</span>
+			<span style={{ color: 'var(--text-muted)' }} className="text-xs font-mono w-12 shrink-0 tabular-nums">
+				{formatTime(duration || 0)}
+			</span>
 
 		</div>
 	)
 }
-

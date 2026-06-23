@@ -12,7 +12,11 @@ export default function VolumeControl() {
 
 	return (
 		<div className="flex items-center gap-2">
-			<button onClick={toggleMute} style={{ color: 'var(--text-secondary)' }} className="text-base hover:text-white transition-colors cursor-pointer w-6 text-center">{volumeIcon}</button>
+			<button onClick={toggleMute}
+				className="control-btn w-10 h-10 rounded-lg text-lg"
+				style={{ color: isMuted ? 'var(--accent-light)' : 'var(--text-secondary)' }}>
+				{volumeIcon}
+			</button>
 			<input
 				type="range"
 				min="0"
@@ -20,10 +24,8 @@ export default function VolumeControl() {
 				step="0.01"
 				value={effectiveVolume}
 				onChange={(e) => setVolumeLevel(parseFloat(e.target.value))}
-				className="w-20 h-1 accent-purple-500 cursor-pointer"
-				style={{ accentColor: 'var(--accent)' }}
+				className="w-24 cursor-pointer"
 			/>
 		</div>
 	)
 }
-

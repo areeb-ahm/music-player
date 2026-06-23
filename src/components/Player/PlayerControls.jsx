@@ -3,27 +3,30 @@ import { usePlayer } from '../../context/PlayerContext'
 export default function PlayerControls() {
 	const { isPlaying, togglePlay, playNext, playPrev, repeatMode, toggleRepeat, isShuffled, toggleShuffle } = usePlayer()
 
-	const base = "cursor-pointer transition-colors p-2 rounded-lg"
-	const secondary = base + " text-xl hover:text-white"
-
 	let repeatIcon = '↺'
 	if (repeatMode === 'one') repeatIcon = '🔂'
 	else if (repeatMode === 'all') repeatIcon = '🔁'
 
 	return (
-		<div className="flex items-center justify-center gap-2">
+		<div className="flex items-center justify-center gap-1">
 
-			<button onClick={toggleShuffle} className={secondary} style={{ color: isShuffled ? 'var(--accent)' : 'var(--text-muted)' }}>⇄</button>
+			<button onClick={toggleShuffle} className="control-btn w-10 h-10 rounded-lg text-xl"
+				style={{ color: isShuffled ? 'var(--accent-light)' : 'var(--text-muted)' }}>⇄</button>
 
-			<button onClick={playPrev} style={{ color: 'var(--text-secondary)' }} className={secondary + " hover:scale-105 active:scale-95"}>⏮</button>
+			<button onClick={playPrev} className="control-btn w-12 h-12 rounded-lg text-2xl"
+				style={{ color: 'var(--text-secondary)' }}>⏮</button>
 
-			<button onClick={togglePlay} className="cursor-pointer w-11 h-11 rounded-full flex items-center justify-center text-lg hover:opacity-90 active:scale-95 transition-all" style={{ background: 'var(--accent)' }}>{isPlaying ? '⏸' : '▶'}</button>
+			<button onClick={togglePlay}
+				className="play-btn w-14 h-14 rounded-full text-xl mx-2">
+				<span className="text-white">{isPlaying ? '⏸' : '▶'}</span>
+			</button>
 
-			<button onClick={playNext} style={{ color: 'var(--text-secondary)' }} className={secondary + " hover:scale-105 active:scale-95"}>⏭</button>
+			<button onClick={playNext} className="control-btn w-12 h-12 rounded-lg text-2xl"
+				style={{ color: 'var(--text-secondary)' }}>⏭</button>
 
-			<button onClick={toggleRepeat} className={secondary} style={{ color: repeatMode !== 'none' ? 'var(--accent)' : 'var(--text-muted)' }}>{repeatIcon}</button>
+			<button onClick={toggleRepeat} className="control-btn w-10 h-10 rounded-lg text-xl"
+				style={{ color: repeatMode !== 'none' ? 'var(--accent-light)' : 'var(--text-muted)' }}>{repeatIcon}</button>
 
 		</div>
 	)
 }
-

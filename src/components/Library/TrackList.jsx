@@ -22,24 +22,27 @@ export default function TrackList() {
 	return (
 		<div className="flex-1 overflow-y-auto">
 
-			<div style={{ borderBottom: '1px solid var(--border)' }} className="flex items-center gap-4 px-4 py-2 sticky top-0 bg-[color:var(--bg-base)]">
+			<div className="flex items-center gap-4 px-8 py-3.5 sticky top-0 z-10"
+				style={{ background: 'var(--bg-base)', borderBottom: '1px solid var(--border)' }}>
 				<div className="w-8" />
 				<div className="w-10" />
-				<p style={{ color: 'var(--text-muted)' }} className="flex-1 text-xs uppercase tracking-wider">Title</p>
-				<p style={{ color: 'var(--text-muted)' }} className="text-xs uppercase tracking-wider w-20 text-right">Genre</p>
-				<p style={{ color: 'var(--text-muted)' }} className="text-xs uppercase tracking-wider w-12 text-right">Time</p>
+				<p style={{ color: 'var(--text-muted)' }} className="flex-1 text-xs uppercase tracking-[0.15em] font-bold">Title</p>
+				<p style={{ color: 'var(--text-muted)' }} className="text-xs uppercase tracking-[0.15em] font-bold w-24 text-right">Genre</p>
+				<p style={{ color: 'var(--text-muted)' }} className="text-xs uppercase tracking-[0.15em] font-bold w-12 text-right">Time</p>
 			</div>
 
 			{filtered.length === 0 ? (
-				<div className="py-20 text-center">
-					<p className="text-4xl mb-3">🎵</p>
-					<p style={{ color: 'var(--text-secondary)' }} className="text-sm">No tracks match your search</p>
+				<div className="py-24 text-center animate-fade-in">
+					<p className="text-5xl mb-4">🎵</p>
+					<p style={{ color: 'var(--text-secondary)' }} className="text-sm font-medium">No tracks match your search</p>
+					<p style={{ color: 'var(--text-muted)' }} className="text-xs mt-1">Try a different keyword</p>
 				</div>
 			) : (
-				filtered.map((track, i) => <TrackItem key={track.id} track={track} index={i} />)
+				<div className="py-1">
+					{filtered.map((track, i) => <TrackItem key={track.id} track={track} index={i} />)}
+				</div>
 			)}
 
 		</div>
 	)
 }
-
